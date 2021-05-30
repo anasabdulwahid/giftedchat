@@ -2,10 +2,16 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { useState } from "react";
+import { useEffect } from "react";
+import { auth } from '../firebase';
 
-const LoginScreen = () => {
+
+
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+ 
+
   return (
     <View style={styles.container}>
       <Input
@@ -24,7 +30,7 @@ const LoginScreen = () => {
         secureTextEntry
       />
       <Button title="sign in" style={styles.button} />
-      <Button title="register" style={styles.button} />
+      <Button title="register" style={styles.button} onPress={() => navigation.navigate('Register')} />
     </View>
   );
 };

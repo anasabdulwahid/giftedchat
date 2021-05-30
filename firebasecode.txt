@@ -1,0 +1,21 @@
+var firebaseConfig = {
+    apiKey: "AIzaSyA7GZ92T-JBfvl0GzC5f_lYLf0HfOTs0_8",
+    authDomain: "gifted-chat-f4ebb.firebaseapp.com",
+    projectId: "gifted-chat-f4ebb",
+    storageBucket: "gifted-chat-f4ebb.appspot.com",
+    messagingSenderId: "809912059470",
+    appId: "1:809912059470:web:012ac1e3fda1861516a51f"
+  };
+
+import * as firebase from 'firebase';
+import 'firebase/auth';
+import 'firebase/firestore';
+
+#database
+screens/firebase.js
+
+npm uninstall firebase
+2. npm cache clear
+3. npm i firebase@^4.8.0 --save
+
+const auth = firebase.auth();

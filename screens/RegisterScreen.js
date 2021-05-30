@@ -2,31 +2,86 @@ import * as React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { useState } from "react";
 import { Input, Button } from "react-native-elements";
+import { auth } from '../firebase';
+
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageURL, setImageUrl] = useState("");
+
+    
+  const register = () => {
+    auth.createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    user.updateProfile({
+    displayName: name,
+    photoURL: imageURL ? imageURL : "https://www.trackergps.com/canvas/images/icons/avatar.jpg"
+
+    }).then(function () {
+    }).catch(function (error) {
+    
+    });
+    // ...
+    })
+    .catch((error) => {
+    var errorMessage = error.message;
+    alert(errorMessage)
+    });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <View style={styles.container}>
-      <Input
-        placeholder="Enter your email"
-        label="Email"
-        leftIcon={{ type: "material", name: "email" }}
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <Input
-        placeholder="Enter your password"
-        label="Password"
-        leftIcon={{ type: "material", name: "lock" }}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-        secureTextEntry
-      />
-      <Button title="sign in" style={styles.button} />
-      <Button title="register" style={styles.button} />
+    <Input
+    placeholder='Enter your name'
+    label='Name'
+    leftIcon={{ type: 'material', name: 'badge' }}
+    value={name}
+    onChangeText={text => setName(text)}
+    />
+    <Input
+    placeholder='Enter your email'
+    label='Email'
+    leftIcon={{ type: 'material', name: 'email' }}
+    value={email}
+    onChangeText={text => setEmail(text)}
+    />
+    <Input
+    placeholder='Enter your password'
+    label='Password'
+    leftIcon={{ type: 'material', name: 'lock' }}
+    value={password} onChangeText={text => setPassword(text)}
+    secureTextEntry
+    />
+    <Input
+    placeholder='Enter your image url'
+    label='Profile Picture'
+    leftIcon={{ type: 'material', name: 'face' }}
+    onChangeText={text => setImageUrl(text)}
+    />
+    <Button
+    title="register" onPress= {register} style={styles.button}
+    />
     </View>
   );
 };
